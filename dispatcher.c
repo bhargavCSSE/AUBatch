@@ -56,14 +56,14 @@ void *executor(void *ptr){
 	buf_tail++;
 	}
 	
-	else if(policy == 1){
+	if(policy == 1){
 		policy_check();
 		for(buf_tail=0; count!=0; buf_tail++){
 		execv_call(cmd_buffer[buf_tail]);
 		count--;
 		}
 	sleep(1);
-	printf("Simulation of SJF finished\nPRESS q to quit\n");
+	printf("Simulation of SJF is finished\nPRESS q to quit\n");
 	pthread_mutex_unlock(&cmd_queue_lock);
 	}
    	
@@ -74,7 +74,7 @@ void *executor(void *ptr){
 		count--;
 		}
 	sleep(1);
-	printf("Simulation of Priority finished\nPRESS h\n");
+	printf("Simulation of Priority is finished\nPRESS q to quit\n");
 	pthread_mutex_unlock(&cmd_queue_lock);
 	}
 

@@ -82,18 +82,9 @@ void policy_check(void){
 	int i = 0,j;
 	switch(policy){
 	case 0:
-		/*Sorting Priority*/
-		for(i=0;i<buf_head-1;i++){
-			for(j=0;j<buf_head-i-1;j++){
-				if(cmd_buffer[j]->priority > cmd_buffer[j+1]->priority)
-				{
-				key = cmd_buffer[j];
-				cmd_buffer[j] = cmd_buffer[j+1];
-				cmd_buffer[j+1] = key;
-				} 
-			}	
-		}
+		/*FCFS*/
 		break;
+		
 	case 1:
 		/*Sorting Burst Time*/
 		for(i=0;i<buf_head-1;i++){
@@ -107,11 +98,21 @@ void policy_check(void){
 			}	
 		}
 		break;
-
+	
 	case 2:
-		/*This is for FCFS*/
-		/*Scheduler and dispatcher are FCFS by default so no extra code needed*/
+		/*Sorting Priority*/
+		for(i=0;i<buf_head-1;i++){
+			for(j=0;j<buf_head-i-1;j++){
+				if(cmd_buffer[j]->priority > cmd_buffer[j+1]->priority)
+				{
+				key = cmd_buffer[j];
+				cmd_buffer[j] = cmd_buffer[j+1];
+				cmd_buffer[j+1] = key;
+				} 
+			}	
+		}
 		break;
+		
 
 	default:
 		break;	
@@ -180,7 +181,7 @@ int cmd_fcfs(int n, char **a)
 {
 	(void)n;
 	(void)a;
-	policy = 2;
+	policy = 0;
 	printf("Policy is changed to FCFS\n");
 	return 0;
 }
@@ -200,7 +201,7 @@ int cmd_priority(int n, char **a)
 {
 	(void)n;
 	(void)a;
-	policy = 0;
+	policy = 2;
 	printf("Policy is changed to Priority scheduling\n");
 	return 0;
 }
